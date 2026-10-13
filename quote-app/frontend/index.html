@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote Generator</title>
+    <script>
+      async function fetchQuote() {
+        const url = "http://18.163.75.90:3000/"
+        const response = await fetch(url);
+        const json = await response.json();
+        document.getElementById("quote").innerHTML = json.quote;
+        document.getElementById("author").innerHTML = json.author;
+      };
+      async function submitQuote() {
+        const form = document.getElementById("add");
+        const options = {
+          "method": form.method,
+          "headers": {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          "body": JSON.stringify(Object.fromEntries((new FormData(form)).entries()))
+        };
+        const response = await fetch(form.action, options);
+        if (!response.ok) {
+          console.error(response);
+        }
+        else {
+          form.reset();
+        }
+      };
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("new-quote").addEventListener("click", fetchQuote);
+        document.getElementById("add-quote").addEventListener("click", submitQuote);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>hello there</h1>
+    <p id="quote"></p>
+    <p id="author"></p>
+    <button type="button" id="new-quote">New quote</button>
+    <hr>
+    <form id="add" method="POST" action="http://18.163.75.90:3000/">
+        <label>Quote: <input type="text" name="quote" value="Hello"></label><br>
+        <label>Author: <input type="text" name="author" value="Ibrahim"></label><br>
+        <button type="button" id="add-quote">Add quote</button>
+    </form>
+  </body>
+</html>
