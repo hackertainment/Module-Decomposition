@@ -45,6 +45,11 @@ app.post("/", (req, res) => {
       res.status(400).send("Expected body to be a JSON object containing keys quote and author.");
       return;
     }
+    if (body.quote.trim()=="" || body.author.trim()=="") {
+      console.error(`Failed to extract quote and author from empty value: ${bodyString}`);
+      res.status(400).send("Expected body to be a JSON object containing non-empty values of quote and author.");
+      return;
+    }
     quotes.push({
       quote: body.quote,
       author: body.author,

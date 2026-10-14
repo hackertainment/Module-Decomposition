@@ -23,12 +23,14 @@
           "body": JSON.stringify(Object.fromEntries((new FormData(form)).entries()))
         };
         const response = await fetch(form.action, options);
+        const text = await response.text();
         if (!response.ok) {
           console.error(response);
         }
         else {
           form.reset();
         }
+        document.getElementById("text").innerHTML = response.status+" "+response.statusText.toUpperCase()+": "+text;
       };
       document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("new-quote").addEventListener("click", fetchQuote);
@@ -42,9 +44,10 @@
     <p id="author"></p>
     <button type="button" id="new-quote">New quote</button>
     <hr>
+    <span id="text"></span><br>
     <form id="add" method="POST" action="http://18.163.75.90:3000/">
-        <label>Quote: <input type="text" name="quote" value="Hello"></label><br>
-        <label>Author: <input type="text" name="author" value="Ibrahim"></label><br>
+        <label>Quote: <input type="text" name="quote" value="Hello" required></label><br>
+        <label>Author: <input type="text" name="author" value="Ibrahim" required></label><br>
         <button type="button" id="add-quote">Add quote</button>
     </form>
   </body>
