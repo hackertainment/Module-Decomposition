@@ -1,0 +1,15 @@
+article {
+  width: fit-content;
+  border-radius: 10px;
+  background-color: gray;
+  padding: 10px;
+  margin-bottom: 2rem;
+}
+
+article span {
+  font-weight: bold;
+}
+
+article p {
+  margin: 0.5rem 0;
+}
