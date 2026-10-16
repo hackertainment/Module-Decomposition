@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <title>Live Chat</title>
+  </head>
+
+  <body>
+    <h1>hello there</h1>
+    <section id="section-message">
+    </section>
+    <button type="button" id="new-chat">New chat</button>
+    <hr>
+    <span id="status"></span><br>
+    <form id="form-message" method="POST" action="http://18.163.75.90:3000/">
+        <label>User: <input type="text" name="user" value="" required></label><br>
+        <label>Chat: <input type="text" name="chat" value="" required></label><br>
+        <button type="button" id="add-chat">Add chat</button>
+    </form>
+
+    <template id="template-message">
+      <article>
+        <span>USER</span>
+        <p>CHAT</p>
+        <div>LIKE</div>
+      </article>
+    </template>
+  </body>
+</html>
